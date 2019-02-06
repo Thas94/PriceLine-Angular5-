@@ -1,0 +1,47 @@
+<div class="container">
+  <h3 class="text-primary">Please Review Your Request</h3>
+  <div class="preview-form row">
+    <div class="col-lg-12"><h5><strong>{{rating}} Star Hotel </strong><span><img src="/src/assets/images/{{rating}}.gif"></span></h5></div>
+    <br>
+    <div class="col-lg-6 col-md-6 col-sm-6 xol-xs-6"><p>Check-In Date:</p></div>
+    <div class="col-lg-6 col-md-6 col-sm-6 xol-xs-6"><p class="text-danger"><strong>{{details.startDate}}</strong></p></div>
+
+    <div class="col-lg-6 col-md-6 col-sm-6 xol-xs-6"><p>Check-Out Date:</p></div>
+    <div class="col-lg-6 col-md-6 col-sm-6 xol-xs-6"><p class="text-danger"><strong>{{details.endDate}}</strong></p></div>
+
+    <div class="col-lg-6 col-md-6 col-sm-6 xol-xs-6"><p>Region:</p></div>
+    <div class="col-lg-6 col-md-6 col-sm-6 xol-xs-6"><p><strong>{{details.destination}}</strong></p></div>
+
+
+    <div class="col-lg-6 col-md-6 col-sm-6 xol-xs-6">Number of Rooms:</div>
+    <div class="col-lg-6 col-md-6 col-sm-6 xol-xs-6"><p><strong>{{details.roomCount}}</strong></p></div>
+
+    <div class="col-lg-6 col-md-6 col-sm-6 xol-xs-6">Number of Nights:</div>
+    <div class="col-lg-6 col-md-6 col-sm-6 xol-xs-6"><p><strong>{{numDays}}</strong></p></div>
+    <div class="col-lg-12 col-md-12 col-sm-12 xol-xs-12"><hr></div>
+  
+
+    <div class="col-lg-6 col-md-6 col-sm-6 xol-xs-6"><p>Offer Price Per Room, Per Night:</p></div>
+    <div class="col-lg-6 col-md-6 col-sm-6 xol-xs-6"><p><strong>R {{bidprice}}</strong></p></div>
+
+    <div class="col-lg-6 col-md-6 col-sm-6 xol-xs-6"><p>Subtotal:</p></div>
+    <div class="col-lg-6 col-md-6 col-sm-6 xol-xs-6"><p><strong>R {{subtotal}}</strong></p></div>
+
+    <div class="col-lg-6 col-md-6 col-sm-6 xol-xs-6"><p>Taxes and Service Fees:</p></div>
+    <div class="col-lg-6 col-md-6 col-sm-6 xol-xs-6"><p><strong>R {{tax}}</strong></p></div>
+
+    <div class="col-lg-6 col-md-6 col-sm-6 xol-xs-6"><p>Total Charges:</p></div>
+    <div class="col-lg-6 col-md-6 col-sm-6 xol-xs-6"><p><strong>R {{totalPrice}}</strong></p></div>
+
+
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+      <div class="btn-group text-center">
+        <button (click)="backClicked()" type="button" class="btn btn-outline-primary"><i class="fas fa-arrow-left"></i> Back</button>
+        <a routerLink="/payment" class="btn btn-primary">Continue</a>
+      </div>
+    </div>
+  </div>
+</div>

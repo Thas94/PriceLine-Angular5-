@@ -1,0 +1,194 @@
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body for sign in-->
+      <div class="modal-body text-center">
+        <h4>Sign In</h4>
+        <i class="fas fa-user-circle fa-10x text-primary"></i>
+        <form class="myform" #loginForm="ngForm" (ngSubmit)="login(userName.value,password.value)">
+            <div class=" row">   
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="form-group"> 
+                  <input type="text" #userName ngModel name="username" class="form-control form-control-lg" placeholder="Username" required>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="form-group"> 
+                  <input type="password" minlength="6" #password ngModel name="password" class="form-control form-control-lg btn-block" placeholder="Password" required>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="submit-btn btn-block">Sign In</button>
+          </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="myModal1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body for registration -->
+      <div class="modal-body text-center">
+        <h4>Sign Up</h4>
+        <i class="fas fa-user-circle fa-10x text-primary"></i>
+        <form class="myform" #registerForm="ngForm" (ngSubmit)="customerSignup(registerForm)">
+            <div class=" row">   
+
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="form-group"> 
+                    <input  type="text" name="UserName" #UserName="ngModel"  [(ngModel)]="user.UserName" class="form-control form-control-lg" placeholder="Username" required>
+                    <div *ngIf="UserName.errors && (UserName.dirty || UserName.touched)" >
+                        <div [hidden]="!UserName.errors.required" class="alert alert-danger">
+                          Username is required!
+                        </div>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="form-group"> 
+                    <input type="text" name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName" class="form-control form-control-lg" placeholder="First Name" required>
+                    <div *ngIf="FirstName.errors && (FirstName.dirty || FirstName.touched)" >
+                        <div [hidden]="!FirstName.errors.required" class="alert alert-danger">
+                          Name is required!
+                        </div>
+
+                    </div>
+                  </div>
+              </div>
+
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="form-group"> 
+                      <input type="text" name="LastName" #LastName="ngModel" [(ngModel)]="user.LastName" class="form-control form-control-lg" placeholder="Last Name" required>
+                      <div *ngIf="LastName.errors && (LastName.dirty || LastName.touched)" >
+                          <div [hidden]="!LastName.errors.required" class="alert alert-danger">
+                              LastName is required!
+                          </div>
+                      </div>
+                    </div>
+                </div>
+              
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="form-group"> 
+                    <input name="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" #Email="ngModel"  [(ngModel)]="user.Email" class="form-control form-control-lg" placeholder="Email" required>
+                    <div *ngIf="Email.errors && (Email.dirty || Email.touched)" >
+                      <div [hidden]="!Email.errors.required" class="alert alert-danger">
+                        Email is required!
+                      </div>
+                      <div [hidden]="!Email.errors.pattern" class="alert alert-danger">
+                        Email must be in the correct pattern
+                      </div>
+                    </div>
+                </div>
+              </div>
+
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="form-group" > 
+                    <input type="password" name="Password" #Password="ngModel" [(ngModel)]="user.Password" minlength="8" class="form-control form-control-lg btn-block" placeholder="Password" required>
+                    <div *ngIf="Password.errors && (Password.dirty || Password.touched)" >
+                        <div [hidden]="!Password.errors.required" class="alert alert-danger">
+                            Password is required!
+                        </div>
+                        <div [hidden]="!Password.errors.minlength" class="alert alert-info">
+                            Password must be more than 8 characters
+                        </div>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class=" form-inline" *ngIf="roles"> 
+                    <!--  <label><strong>Roles</strong></label>-->
+                       <ul >
+                        <li *ngFor="let item of roles; let i = index"  style="list-style:none">
+                              <input  type="checkbox" [id]="'roles-'+i" value="{{item.Id}}" [checked]="item.selected" (change)="updateSelectedRoles(i)">
+                              <label class="form-check-label" [for]="'roles-'+i">{{item.Name}}</label>
+                        </li>
+                      </ul>  
+                    </div>
+              </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <button type="submit" class="submit-btn btn-block" [disabled]="registerForm.invalid">Sign Up</button>
+            </div>
+
+          </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="hero">
+  <h3>Hotels  <i class="fas fa-hotel"></i> </h3>
+  <div>
+   <h5>Bid & save more on your next hotel</h5>
+  </div>
+
+  <div class="hero-content">
+    
+
+    <form class="myform" #bidForm="ngForm" (ngSubmit)="submitBid(bidForm)">
+      <div class=" row">   
+        <div class="col-lg-12 col-md-6 col-sm-12">
+          <div class="form-group" id="locationField"> 
+            <label >Location <i class="fas fa-map-marker-alt"></i> </label>
+            <input required id="autocomplete" blur="needed()" autocomplete="off" type="text" [(ngModel)]="destination"  name="destination" class="form-control form-control-lg" placeholder="Where are you going?">
+          </div>
+        </div>
+  
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <label >Check-in <i class="far fa-calendar-plus"></i> </label>
+              <div class="form-group input-group mb-3">
+                <input id="startDate" name="startDate" [(ngModel)]="startDate" type="date" class="form-control form-control-lg" placeholder="Date">
+              </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <label >Check-out <i class="fas fa-calendar-minus"></i> </label>
+          <div class="form-group input-group mb-3">
+            <input id="endDate" name="endDate" [(ngModel)]="endDate" type="date" class="form-control form-control-lg" placeholder="Date">
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <label >Room(s) <i class="fas fa-bed"></i> </label>
+          <div class="form-group">
+            <select name="roomCount" [(ngModel)]="roomCount" class="form-control form-control-lg" id="sel1">
+              <option value="1" selected>1 Room</option>
+              <option value="2">2 Rooms</option>
+              <option value="3">3 Rooms</option>
+              <option value="4">4 Rooms</option>
+              <option value="5">5 Rooms</option>
+              <option value="6">6 Rooms</option>
+              <option value="7">7 Rooms</option>
+              <option value="8">8 Rooms</option>
+              <option value="9">9 Rooms</option>
+              <option value="10">10+ Rooms</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="col-lg-12 col-md-6 col-sm-12">
+            <div class="form-group" id="locationField"> 
+              <button type="button" type="submit" class="btn btn-primary" style="width:100%">Submit</button><br/>
+            </div>
+          </div>
+      </div>
+    </form>  
+  </div>
+</div>
+

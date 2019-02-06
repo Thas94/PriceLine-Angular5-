@@ -1,0 +1,180 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample10" aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
+        <ul class="nav " role="tablist">
+            <li class="nav-item">
+                <a class="btn btn-primary active" data-toggle="tab" href="#home">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-primary" data-toggle="tab" href="#menu1">Add Room</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="tab-content">
+    <div id="home" class="container tab-pane active"><br>
+        <h3>Dashboard</h3>
+  
+  <table class="table table-striped "   *ngIf="roomDetails">
+
+    <thead>
+      <tr>
+        <th scope="col">Room type</th>
+        <th scope="col">Number of rooms</th>
+        <th scope="col">Price (p/n)(p/r)</th>
+        <th col scope="col">Start date</th>
+        <th col scope="col">End date</th>
+        <th col scope="col">Contact person</th>
+        <th col scope="col"></th>                 
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr  *ngFor="let room of roomDetails">
+        <td>{{room.room_Type}}</td>
+        <td>{{room.numRooms}}</td>
+        <td>R{{room.room_Price}}</td>
+        <td>{{room.startDate}}</td>
+        <td>{{room.endDate}}</td>
+        <td>{{room.contact_Person}}</td>
+       
+        
+
+        <!-- Modal -->
+        <td><button class="btn btn-info" data-toggle="modal" data-target="#myModal"   (click)= "fillModal(room)">Update</button></td>
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+          
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Update</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+       
+                <!-- Modal body -->
+            <div class="modal-body" *ngIf="roomModul">
+                  
+                <form class ="MyForm" #updaterForm="ngForm" (ngSubmit)="updateHoteldeatils(updaterForm)">
+                 
+                  <div class="col-lg-12 col-md-12 col-sm-12">       
+                    <input  type="hidden" class="form-control" id="room_id" name="room_id" #room_id="ngModel" [(ngModel)]="roomModul.room_id">
+                  </div>
+
+                
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <label for="room_Type">Room type:</label>
+                    <input  type="text" class="form-control" id="room_Type" name="room_Type" #room_Type="ngModel" [(ngModel)]="roomModul.room_Type">
+                  </div>
+
+                  
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <label for="numRooms">Number of rooms:</label>
+                    <input  type="text" class="form-control" id="numRooms" name="numRooms" #numRooms="ngModel" [(ngModel)]="roomModul.numRooms">
+                  </div>
+
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <label for="room_Price">Price (p/r) (p/n):</label>
+                    <input  type="text" class="form-control" id="room_Price" name="room_Price" #room_Price="ngModel" [(ngModel)]="roomModul.room_Price">
+                  </div>
+
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <label for="contact_Person">Contact person:</label>
+                    <input  type="text" class="form-control" id="contact_Person" name="contact_Person" #contact_Person="ngModel" [(ngModel)]="roomModul.contact_Person">
+                  </div>
+
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                        <input  type="hidden" class="form-control" id="startDate" name="startDate" #startDate="ngModel" [(ngModel)]="roomModul.startDate">
+                      </div>
+    
+                      <div class="col-lg-12 col-md-12 col-sm-12">
+                            <label for="endDate">End date:</label>
+                            <input  type="text" class="form-control" id="endDate" name="endDate" #endDate="ngModel" [(ngModel)]="roomModul.endDate">
+                          </div>
+
+
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <input  type="hidden" class="form-control" id="hotelMan_id" name="hotelMan_id" #hotelMan_id="ngModel" [(ngModel)]="roomModul.hotelMan_id">
+                  </div>
+
+
+                  <div class="col-lg-12 col-md-12 col-sm-12"> 
+                       
+                   <button type="submit" class="btn btn-info" >submit</button>
+                  </div>
+                   
+                </form>
+            </div>          
+              </div>
+            </div>
+          </div>
+      </tr>
+    </tbody>
+
+  </table>
+        
+
+    </div>
+    <div id="menu1" class="container tab-pane fade"><br>
+        
+            <div class="hero1-content">  
+                <form class="myform" #hotelDForm="ngForm" (ngSubmit)="addRoom(hotelDForm)">
+                    <div class=" row">   
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <label >Room Type: <i class="fas fa-home"></i> </label>
+                                <div class="form-group">
+                                    <select name="room_Type" #room_Type="ngModel" [(ngModel)]="hotel.room_Type" class="form-control form-control-lg" id="room_Type">
+                                    <option value="Single" selected>Single</option>
+                                    <option value="Double">Double</option>
+                                    <option value="Triple">Triple</option>
+                                    <option value="Quad">Quad</option>
+                                    <option value="Queen">Queen</option>
+                                    <option value="King">King</option>
+                                    <option value="Master Suite">Master Suite</option>
+                                    <option value="Mini-Suite">Mini-Suite</option>          
+                                    </select>
+                                </div>
+                        </div>
+                  
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <label >Number of rooms: <i class="fas fa-bed"></i> </label>
+                            <input type="text" id="numRooms" name="numRooms" #numRooms="ngModel" [(ngModel)]="hotel.numRooms" class="form-control form-control-lg" placeholder="e.g. 3">
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <label >Start Date: <i class="fas fa-bed"></i> </label>
+                            <input id="startDate" name="startDate" [(ngModel)]="startDate" type="date" class="form-control form-control-lg">
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <label >End Date: <i class="fas fa-bed"></i> </label>
+                            <input id="endDate" name="endDate" [(ngModel)]="endDate" type="date" class="form-control form-control-lg">
+                        </div>
+                                 
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <label >Main contact name: <i class="fas fa-user-circle"></i> </label>
+                            <input type="text"  id="contact_Person" name="contact_Person" #contact_Person="ngModel" [(ngModel)]="hotel.contact_Person" class="form-control form-control-lg" placeholder="e.g. Thabiso Malematja">
+                        </div>
+                                        
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <label >Room Price: <i class="fas fa-dollar"></i> </label>
+                            <input type="text"  id="room_Price" name="room_Price" #room_Price="ngModel" [(ngModel)]="hotel.room_Price" class="form-control form-control-lg"  placeholder="e.g. 150.50">
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <input type="hidden" id="hotelMan_id" name="hotelMan_id" #hotelMan_id="ngModel" [(ngModel)]="managerId" class="form-control form-control-lg"  placeholder="">
+                        </div>
+                                
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <label > </label>
+                            <button type="submit" class="btn btn-block btn-primary">Continue <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                            
+            </form>  
+    </div>
+</div>

@@ -1,0 +1,67 @@
+/* You can add global styles to this file, and also import other style files */
+.hero{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #687B8E;
+    background-image: url(https://images.pexels.com/photos/1001965/pexels-photo-1001965.jpeg?cs=srgb&dl=architecture-chair-contemporary-1001965.jpg&fm=jpg);
+    
+    color:#fff;
+}
+.hero-content{
+    position: relative;
+    z-index: 10;
+    padding: 60px 15px;
+    max-width: 1280px;
+    margin: 0 auto;
+    width:100%;
+    
+}
+
+.hero1{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #687B8E;
+    background-image: url(assets/kapa.jpg);
+    
+    color:black;
+}
+.hero1-content{
+    position: relative;
+    z-index: 1;
+    padding: 60px 15px;
+    max-width: 1280px;
+    margin: 0 auto;
+    width:100%;
+    
+}
+
+/*My form*/
+.myform{
+    background-color: #fff;
+    border-radius: 7px;
+    padding:20px;
+}
+.submit-btn{
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    font-family: inherit;
+    font-weight: 600;
+    line-height: 1.5;
+    cursor: pointer;
+    border-radius: 2px;
+    background-color: #007aff;
+    color: #fff;
+    border-width: 0;
+    border-style: solid;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 22px;
+    margin: 0px;
+}
+/*My form*/

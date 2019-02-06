@@ -1,0 +1,50 @@
+<div class="row container-fluid">
+  
+  <div class="col-xs-12 col-md-12 col-lg-6">
+    <img src="../../assets/logo.png" />
+    <h3></h3>
+  </div>
+  
+  <div class="col-xs-12 col-md-12 col-lg-6">
+    <h3>Register now</h3>
+    <form class="myform" #registerForm="ngForm" (ngSubmit)="customerSignup(registerForm)">
+
+      <div class="form-group"> 
+        <label><strong>UserName</strong></label>
+        <input type="text" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName" class="form-control form-control-lg" placeholder="User Name" required>
+      </div>
+
+      <div class="form-group"> 
+        <label><strong>Name</strong></label>
+        <input type="text" name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName" class="form-control form-control-lg" placeholder="First Name" required>
+      </div>
+
+      <div class="form-group"> 
+          <label><strong>Last Name</strong></label>
+          <input type="text" name="LastName" #LastName="ngModel" [(ngModel)]="user.LastName" class="form-control form-control-lg" placeholder="Last Name" required>
+      </div>
+
+      <div class="form-group"> 
+          <label><strong>Email</strong></label>
+          <input type="text" name="Email" #Email="ngModel" [(ngModel)]="user.Email" class="form-control form-control-lg" placeholder="Email" required>
+      </div>
+
+      <div class="form-group"> 
+          <label><strong>Password</strong></label>
+          <input type="password" name="Password" #Password="ngModel" [(ngModel)]="user.Password" class="form-control form-control-lg btn-block" placeholder="Password" required>
+      </div>
+
+      <div class="form-group" *ngIf="roles"> 
+        <!--<label><strong>Roles</strong></label>-->
+        <ul>
+          <a *ngFor="let item of roles; let i = index">
+            <input type="checkbox" [id]="'roles-'+i" value="{{item.Id}}" [checked]="item.selected" (change)="updateSelectedRoles(i)">
+            <label [for]="'roles-'+i">{{item.Name}}</label>
+          </a>
+        </ul> 
+      </div>  
+      <button type="submit" class="submit-btn btn-block">Login</button>
+
+    </form> 
+  </div>
+</div>

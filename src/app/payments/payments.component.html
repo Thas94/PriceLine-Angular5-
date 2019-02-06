@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row">
+      <form class="myform" #paymentForm="ngForm" (ngSubmit)="makePayment(paymentForm)">
+          <div class=" row">   
+            <h2 class="btn-block">Card details</h2>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group"> 
+                  <input type="text" class="form-control" name="acc_holder" #acc_holder="ngModel" [(ngModel)]="bankDetails[0].acc_holder" placeholder="Account Holder">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="form-group"> 
+                    <input type="text" class="form-control" name="bank_Name" #bank_Name="ngModel" [(ngModel)]="bankDetails[0].bank_Name" placeholder="Bank Name">
+                  </div>
+              </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="form-group">
+                      <input type="text" class="form-control" name="card_no" #card_no="ngModel" [(ngModel)]="bankDetails[0].card_no" placeholder="Card Number">
+                    </div>
+            </div>
+    
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <input name="acc_no" #acc_no="ngModel" [(ngModel)]="bankDetails[0].acc_no" type="text" class="form-control form-control-lg" placeholder="Account number">
+              </div>
+            </div>
+            
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                  <input type="text" class="form-control" name="branch_no" #branch_no="ngModel" [(ngModel)]="bankDetails[0].branch_no" placeholder="Branch Number">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="form-group">
+                <input type="text" class="form-control" name="acc_Type" #acc_Type="ngModel" [(ngModel)]="bankDetails[0].acc_Type" placeholder="Account Type">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                  <input type="text" class="form-control" name="cvv" #cvv="ngModel" [(ngModel)]="bankDetails[0].cvv" placeholder="CVV" max="3">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                  <input type="date" id="startDate"name="exp_Date" #exp_Date="ngModel" [(ngModel)]="bankDetails[0].exp_Date" class="form-control" placeholder="Date">
+              </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <input type="hidden" class="form-control" name="user_id" #user_id="ngModel" [(ngModel)]="bankDetails[0].user_id">
+              </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">    
+                <button type="button" type="submit" class="btn btn-block btn-primary" (ngClick) = "placeBid">Book</button>
+            </div>
+          </div>
+        </form>  
+  </div>
+</div>

@@ -1,0 +1,178 @@
+<!--
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+
+          <li class="nav-item">
+            <a class="nav-link active" href="home">
+              <span data-feather="home"></span>
+                Home <span class="sr-only">(current)</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="dashboard">
+              <span data-feather="file"></span>
+                Dashboard
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="hotels">
+              <span data-feather="file"></span>
+                Hotels
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#profile">
+              <span data-feather="customer"></span>
+                Customers
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#startOffer">
+              <span data-feather="offer"></span>
+                Start Offer
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+-->
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+  <h1>Dashboard <span class="badge badge-secondary"> Admin </span></h1>
+  <br>
+  
+  <div class="card text-center"></div>
+
+  <br>
+
+  <!-- Users Table -->
+  <h3 class="display-1">Users</h3>
+  
+  <table class="table table-striped table-dark"   *ngIf="users">
+
+    <thead>
+      <tr>
+        <th scope="col">User ID</th>
+        <th scope="col">UserName</th>
+       
+        <th scope="col">Email</th>
+        <th scope="col">FirstName</th>
+        <th scope="col">LastName</th>
+      </tr>
+    </thead>
+
+    <tbody >
+      <tr  *ngFor="let user of users">
+        <td>{{user.Id}}</td>
+        <td>{{user.UserName}}</td>
+        <td style="display:none;">{{user.Password}}</td>
+        <td style="display:none;">{{user.PasswordHash}}</td>
+        <td style="display:none;">{{user.SecurityStamp}}</td>
+        <td>{{user.Email}}</td>
+        <td>{{user.FirstName}}</td>
+        <td>{{user.LastName}}</td>
+        <td><button class="btn btn-danger"   (click)= "deleteUser(user.Id)">Delete</button></td>
+      </tr>
+    </tbody>
+
+  </table>
+  <!-- End of  Users Table -->
+
+   <!-- Managers Table -->
+   <h3 class="display-1">Hotel Managers</h3>
+  
+   <table class="table table-striped table-dark"  *ngIf="managers"  >
+ 
+     <thead>
+       <tr>
+         <th scope="col">User ID</th>
+         <th scope="col">UserName</th>
+        
+         <th scope="col">Email</th>
+         <th scope="col">FirstName</th>
+         <th scope="col">LastName</th>
+       </tr>
+     </thead>
+ 
+     <tbody >
+       <tr  *ngFor="let man of managers">
+         <td>{{man.Id}}</td>
+         <td>{{man.UserName}}</td>
+         <td style="display:none;">{{man.Password}}</td>
+         <td style="display:none;">{{man.PasswordHash}}</td>
+         <td style="display:none;">{{man.SecurityStamp}}</td>
+         <td>{{man.Email}}</td>
+         <td>{{man.FirstName}}</td>
+         <td>{{man.LastName}}</td>
+         <td><button class="btn btn-danger"   (click)= "deleteUser(man.Id)">Delete</button></td>
+       </tr>
+     </tbody>
+ 
+   </table>
+   <!-- End of  managers Table -->
+
+  <br>
+
+  <!-- Card(s) gorup for information maybe
+  <div class="row">
+
+    <div class="col-md-6">
+      <div class="card text-white bg-success">
+        <div class="card-header"><strong><h5>Home</h5></strong></div>
+          <div class="card-body">
+            <h5 class="card-title">Home Cart</h5>
+            <p class="card-text">Home page shows the biding page where the user enters where they want to go to, check in and check out dates, and the number of rooms you wanna book for.</p>
+            <a href="home" class="btn btn-secondary">Go To Homepage</a>
+          </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card text-white bg-danger">
+        <div class="card-header"><strong><h5>Accounts</h5></strong></div>
+          <div class="card-body">
+            <h5 class="card-title">Account Cart</h5>
+            <p class="card-text">Accounts page shows all the registered user accouts and also registered hotel accounts.</p>
+            <a href="home" class="btn btn-secondary">Go To Homepage</a>
+          </div>
+      </div>
+    </div>
+
+  </div> -->
+  <!-- End of Card(s) gorup for information maybe -->
+
+  <br>
+
+  
+  
+  
+
+
+  <!--
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Users</h1>
+    <div class="btn-toolbar mb-2 mb-md-0"></div>
+  </div>
+
+  <div class="media">
+    <img class="align-self-center mr-3" src=".../64x64" alt="Image">
+    <div class="media-body">
+      <h5 class="mt-0">Center-aligned media</h5>
+      <p>User information.</p>
+      <p class="mb-0">Description</p>
+    </div>
+  </div>
+  -->
+
+</main>
+

@@ -5,6 +5,7 @@ import {Profile} from '../shared/profile.model'
 import {UserService} from 'src/app/shared/user.service';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
  
 @Component({
   selector: 'app-profile',
@@ -19,7 +20,8 @@ export class ProfileComponent implements OnInit {
   bankDetails : any;
   isAvail : boolean = false;
 
-  constructor(private userService  : UserService, private bankService  : ServicesService, private toastr : ToastrService, private toaster : ToastrService,private service : ServicesService) { }
+  constructor(private userService  : UserService, private bankService  : ServicesService, private toastr : ToastrService,
+     private toaster : ToastrService,private service : ServicesService,private _router : Router) { }
 
   ngOnInit() {
     this.userService.getUserClaims().subscribe((data :any ) => {
@@ -118,6 +120,7 @@ export class ProfileComponent implements OnInit {
       else {
         this.resetForm(form);
         this.toastr.success('Bank details added to account');     
+        this._router.navigate(['/profile']);
       }
     }); 
   }

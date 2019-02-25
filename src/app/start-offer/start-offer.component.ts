@@ -38,7 +38,7 @@ export class StartOfferComponent implements OnInit {
   priceRandom : any;
   room : any;
   price: any;
-
+  roomLeft : any;
   userRating:any;
   ratings: any= ['5','4','3','2']
   ChosenArea:any
@@ -80,7 +80,7 @@ export class StartOfferComponent implements OnInit {
 
     //this.ChosenArea = localStorage.getItem("chosenArea").toString()
     //console.log(this.ChosenArea)   
-    this.filterHotel = this.bidService.searchByLocationAndRating(this.resultsHotel,"Gardens",parseInt(this.userRating))
+    this.filterHotel = this.bidService.searchByLocationAndRating(this.resultsHotel,"Johannesburg",parseInt(this.userRating))
 
     //this.filterHotel = this.bidService.searchByLocationAndRating(this.resultsHotel, this.ChosenArea,parseInt(this.userRating))
 
@@ -113,7 +113,7 @@ export class StartOfferComponent implements OnInit {
         
 
         this.roomSearch = this.bidService.getRoomsNo(this.priceRandom,this.details.roomCount,this.details.startDate,this.details.endDate);
-        console.log("aaaa",this.roomSearch)
+        console.log("filterRooms",this.roomSearch)
         if(this.roomSearch.length == 0)
         {
           this.toastr.warning('No rooms available','Try again later')
@@ -131,8 +131,12 @@ export class StartOfferComponent implements OnInit {
             localStorage.setItem("bidprice", JSON.stringify(this.price));
             this._router.navigate(['/previewoffer']);
           }
-  
-          console.log("Room found",this.room)
+ 
+          console.log("chosen room",this.room)
+
+          this.roomLeft = this.bidService.roomsLeft(this.room,this.details.roomCount)
+          localStorage.setItem("RoomsLeft", JSON.stringify(this.roomLeft));
+          console.log("RoomsLeft",this.roomLeft)
         }
      
         });

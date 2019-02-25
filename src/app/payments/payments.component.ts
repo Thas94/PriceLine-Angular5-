@@ -6,6 +6,7 @@ import { UserService } from '../shared/user.service';
 import { ServicesService } from '../shared/services.service';
 import { BidService } from '../shared/bid.service';
 import { Router } from '@angular/router';
+import { BankDetails } from '../shared/bank-details.model';
 
 @Component({
   selector: 'app-payments',
@@ -16,51 +17,77 @@ export class PaymentsComponent implements OnInit {
 
   constructor(private bidService : BidService, private service  : ServicesService,private userService :  UserService,  private toastr : ToastrService,private _router : Router) { }
   bidDetails : any;
-  provRate : any;
+  RoomsLeft : any;
   hotel : any;
   body : any;
   bid : any;
   id : any;
   bankDetails : any;
-  
+  bankD : BankDetails;
   mailBody : any;
   dateBody : any;
   userBody : any;
   priceRandom : any;
   chosenHotel : any;
+  EnterBank : boolean = false;
+  
 
   ngOnInit() {
 
-    
+    this.bankD = new BankDetails();
 
     this.id = localStorage.getItem('user_id')
-    console.log("uuuu",this.id)
+    console.log("user ID",this.id)
     this.service.getBankDetailsID(this.id).subscribe((data : any)=>{
       this.bankDetails = data;
       
-      this.priceRandom = JSON.parse(localStorage.getItem("priceRandom"))
-    console.log("qqqq",this.priceRandom)
-      console.log("sdvsdv",this.bankDetails)
-      this.bidDetails = JSON.parse(localStorage.getItem("bidDetails"))
-      console.log("PP",this.bidDetails)
+    this.priceRandom = JSON.parse(localStorage.getItem("priceRandom"))
+    console.log("chosen room",this.priceRandom)
+    console.log("user bank details",this.bankDetails)
+
+
+      if(this.bankDetails.length <= 0)
+      {
+        this.EnterBank = false;
+      }
+      else
+      {
+        this.EnterBank = true;
+      }
+
+
+      this.bidDetails = JSON.parse(localStorage.getItem("details"))
+      console.log("bidDetails",this.bidDetails)
       this.chosenHotel = JSON.parse(localStorage.getItem("chosenHotel"))
-      console.log("brrr",this.chosenHotel)
+      console.log("chosen Hotel",this.chosenHotel)
+
+      this.RoomsLeft = JSON.parse(localStorage.getItem("RoomsLeft"))
+      console.log("RoomsLeft",this.RoomsLeft)
     })
 
    
 
-    this.provRate = JSON.parse(localStorage.getItem("provRate"))
-    console.log("lll",this.provRate)
-
-    this.hotel = this.bidService.findHotelForRoom(this.provRate,this.bidDetails.hotelMan_id)
-    console.log("vvv",this.hotel)
   }
 
-  makePayment(form: NgForm): void{
+  registerBankDetails(form:NgForm) {
+    console.log("YSDVFSD",form.value)
+    this.service.registerBankDetails(form.value)
+    .subscribe((data: any) => {
+      if (data.Succeeded == true) {
+        this.toastr.error('Failed to add bank details');
+      }
+      else {
+        this.toastr.success('Bank details added to your account');    
+        this.makePayment(); 
+      }
+    }); 
+  }
+
+  makePayment(): void{
     this.body = {
       contact_Person : this.priceRandom.contact_Person,
       endDate : this.priceRandom.endDate,
-      numRooms : this.priceRandom.numRooms,
+      numRooms : this.bidDetails.roomCount,
       room_Price : this.priceRandom.room_Price,
       room_Type : this.priceRandom.room_Type,
       startDate : this.priceRandom.startDate,
@@ -79,8 +106,8 @@ export class PaymentsComponent implements OnInit {
     //search data ( dates )
      this.dateBody =JSON.parse(localStorage.getItem('details'));
      localStorage.setItem("body", JSON.stringify(this.body));
-     console.log("bosy", this.body)
-     alert(this.body.Hotel_Name);
+     console.log("body", this.body)
+     //alert(this.body.Hotel_Name);
   
   
     this.mailBody = this.body;
@@ -109,15 +136,10 @@ export class PaymentsComponent implements OnInit {
           this._router.navigate(['/bidresults']);
         }
       })
-      this.service.putHotel(this.bidDetails.room_id,this.bidDetails)
+
+      this.service.putHotel(this.RoomsLeft.room_id,this.RoomsLeft)
       .subscribe((data: any) => {
-        if (data.Succeeded == true) {
-          console.log("yes")
-        }
-        else 
-        {  
-          console.log("no")
-        }
+        
       })
   }
 

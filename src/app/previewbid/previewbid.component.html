@@ -1,5 +1,42 @@
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body for sign in-->
+        <div class="modal-body text-center">
+          <h4>Sign In</h4>
+          <i class="fas fa-user-circle fa-10x text-primary"></i>
+          <form class="myform" #loginForm="ngForm" (ngSubmit)="login(userName.value,password.value)">
+              <div class=" row">   
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="form-group"> 
+                    <input type="text" #userName ngModel name="username" class="form-control form-control-lg" placeholder="Username" required>
+                  </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="form-group"> 
+                    <input type="password" minlength="6" #password ngModel name="password" class="form-control form-control-lg btn-block" placeholder="Password" required>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="submit-btn btn-block">Sign In</button>
+            </form> 
+        </div>
+      </div>
+    </div>
+  </div>
+
 <div class="container">
   <h3 class="text-primary">Please Review Your Request</h3>
+  <div *ngIf="hide">
+      <li> <a href="" class="nav-link" data-toggle="modal" data-target="#myModal"><i class="fas fa-sign-in-alt"></i> Sign In </a></li>
+  </div>
+
+
   <div class="preview-form row">
     <div class="col-lg-12"><h5><strong>{{rating}} Star Hotel </strong><span><img src="/src/assets/images/{{rating}}.gif"></span></h5></div>
     <br>
@@ -40,7 +77,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12 text-center">
       <div class="btn-group text-center">
         <button (click)="backClicked()" type="button" class="btn btn-outline-primary"><i class="fas fa-arrow-left"></i> Back</button>
-        <a routerLink="/payment" class="btn btn-primary">Continue</a>
+        <a (click)="Next()" class="btn btn-primary">Continue</a>
       </div>
     </div>
   </div>

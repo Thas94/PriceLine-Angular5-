@@ -42,6 +42,8 @@ export class BidService {
     {
       alert("No Results found under your search criteria of a city and rating")
     }
+    console.log("thas",obj)
+    console.log("malix",filt)
     return filt;
   }
 

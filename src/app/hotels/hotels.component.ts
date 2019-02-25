@@ -56,7 +56,7 @@ export class HotelsComponent implements OnInit {
           else {
             this.resetForm(form);
             this.toastr.success('Hotel address added');
-            this._router.navigate(['/home']);
+            this._router.navigate(['/dashboard']);
           }
         });
       }

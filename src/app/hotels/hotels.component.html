@@ -7,9 +7,11 @@
               <form class="myform2" #contForm="ngForm" (ngSubmit)="addHotel(contForm)">
                   <div class=" row">
   
-                      <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="col-lg-4 col-md-6 col-sm-12" style="margin:above" >
+                        <div class="form-group"> 
                           <input type="text"  id="country" name="country" #Country="ngModel" [(ngModel)]="address.Country" class="form-control form-control-lg" placeholder="Country">
-                      </div>
+                    </div>
+                        </div>
                               
                       <div class="col-lg-4 col-md-6 col-sm-12">
                           <input type="text"  id="province" name="Province" #Province="ngModel" [(ngModel)]="address.Province" class="form-control form-control-lg" placeholder="State/Province">
@@ -20,19 +22,24 @@
                       </div>
                   
                       <div class="col-lg-4 col-md-6 col-sm-12">
-                          <input type="text"  id="zip" name="zip_code" #zip_code="ngModel" [(ngModel)]="address.zip_code" class="form-control form-control-lg" placeholder="ZIP/Postal Code">
+                            <div class="form-group"> 
+                         
+                               
+                             <input type="text"  id="zip" name="zip_code" #zip_code="ngModel" [(ngModel)]="address.zip_code" class="form-control form-control-lg" placeholder="ZIP/Postal Code">
                       </div>
-          
+           </div>  
                       <div class="col-lg-4 col-md-6 col-sm-12">
                           <input type="text"  id="add" name="street_Address" #street_Address="ngModel" [(ngModel)]="address.street_Address" class="form-control form-control-lg" placeholder="Street Adrress">
                       </div>
       
                       <div class="col-lg-4 col-md-6 col-sm-12">
-                          <input type="text"  id="phone" name="phone_no" #phone_no="ngModel" [(ngModel)]="address.phone_no" class="form-control form-control-lg" placeholder="Phone Number">
+                          <input type="text"  id="phone" name="phone_no" #phone_no="ngModel" [(ngModel)]="address.phone_no" class="form-control form-control-lg" placeholder="Phone/Tel Number">
                       </div>
       
                       <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
                           <input type="text"  id="website" name="website" #website="ngModel" [(ngModel)]="address.website" class="form-control form-control-lg" placeholder="Website">
+                      </div>
                       </div>
       
                       <div class="col-lg-4 col-md-6 col-sm-12">
@@ -48,9 +55,10 @@
                       </div>
                       
                           <div class="col-lg-4 col-md-6 col-sm-12">
-                              <label ><i class="fas fa-arrow-down"></i> </label>
-                              <button type="submit" class="btn btn-lg btn-primary">Submit</button> 
+                                 
+                              <button type="submit" class="btn btn-lg btn-primary btn-block">Submit <i class="fas fa-arrow-down"></i> </button> 
                       </div>
+                          
                   </div>     
               </form> 
           </div>

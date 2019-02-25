@@ -86,7 +86,7 @@ export class HomeComponent implements OnInit {
   customerSignup(registerForm: NgForm) {
      
      this.x = this.roles.filter(x => x.selected).map(y => y.Name)
-     alert(this.x);
+
       this.service.registerUser(registerForm.value, this.x)
         .subscribe((data: any) => {
 

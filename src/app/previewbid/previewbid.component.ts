@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {Location} from '@angular/common';
 import { BidService } from '../shared/bid.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { User } from '../shared/user.model';
+import { ServicesService } from '../shared/services.service';
+import { UserService } from '../shared/user.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-previewbid',
@@ -17,38 +23,98 @@ export class PreviewbidComponent implements OnInit {
   rating:string
 
   foundId : any;
+  id : any;
 
-  price : any;
-  randomPrice : any;
-  roomLeft : any;
-  roomSearch : any;
-  priceRandom : any;
 
-  constructor(private _location: Location,private bidService : BidService) { }
+  roomCount = "1 Room"
+  userClaims : any;
+  user : User;
+  isLoginError : boolean = false;
+  load : boolean;
+  yes : string;
+  
+  roles : any[];
+  numNights : any;
+  managerID;
+  x : any;
+  hotelResults : any;
+
+  manager : any ='Hotel_Manager'; 
+
+
+  hide : boolean = false;
+
+
+  constructor(private _location: Location,private bidService : BidService, private toastr : ToastrService,private _router : Router,
+    private service : ServicesService,
+    private userService  : UserService) { }
 
   ngOnInit() {
 
-    this.bidprice = localStorage.getItem("bidprice");
+    this.id = localStorage.getItem('user_id')
+    console.log("user ID",this.id)
+    
+
+    //this.bidprice = localStorage.getItem("bidprice");
     this.details = JSON.parse(localStorage.getItem("details"))
-    this.priceRandom = JSON.parse(localStorage.getItem("priceRandom"))
     this.bidprice = JSON.parse(localStorage.getItem("bidprice"))
     this.numDays = localStorage.getItem("numDays");
     this.rating = localStorage.getItem("rating");
     this.foundId = (localStorage.getItem("rate"))
     this.calculateSubtotal()
 
-    console.log("kk",this.foundId)
-    this.roomSearch = this.bidService.getRoomsNo(this.foundId,this.details.roomCount,this.details.startDate,this.details.endDate);
-    console.log("aaaa",this.roomSearch)
+  }
 
-   this.randomPrice = this.bidService.randomizeByPrice(this.roomSearch,this.bidprice)
-   console.log("UU",this.randomPrice)
-
-   this.roomLeft = this.bidService.roomsLeft(this.randomPrice,this.details.roomCount)
-   this.roomLeft = this.bidService.roomsLeft(this.priceRandom,this.details.roomCount)
-   localStorage.setItem("bidDetails", JSON.stringify(this.roomLeft));
+  login(username,password) {
+    this.service.userAuthentication(username, password).subscribe((data : any) => {
+      localStorage.setItem('userToken', data.access_token);
+      localStorage.setItem('userRoles', data.role);
+      localStorage.setItem('username', username);
+      this.toastr.success('Sign In successful.');
+      this.yes = "login";
+      this.load = true;
+      localStorage.setItem("yes",this.yes);
    
-   //console.log("OOO",this.roomLeft) 
+      this.userService.getUserClaims().subscribe((data :any ) => {
+        this.userClaims = data;
+        //console.log("XFBVDF",this.userClaims.Id)
+        localStorage.setItem("username", this.userClaims.UserName);
+        localStorage.setItem("user_id", this.userClaims.Id);
+        
+      });
+  
+         
+       
+       window.location.reload();
+   
+    },
+    (err : HttpErrorResponse)=>{
+      this.toastr.error('Incorrect username or password');
+    });
+
+    if(this.load == true)
+    {
+      this.userService.getUserClaims().subscribe((data :any ) => {
+        this.userClaims = data;
+        localStorage.setItem("username", this.userClaims.UserName);
+        localStorage.setItem("user", this.userClaims.Id);
+      });
+    }
+  }
+
+
+  Next()
+  {
+    if(this.id == null)
+    {
+      this.toastr.error('Not Logged in','Log in to continue')
+      this.hide = true
+    }
+    else
+    {
+      this.hide = false
+      this._router.navigate(['/payment']);
+    }
   }
 
   backClicked() {
